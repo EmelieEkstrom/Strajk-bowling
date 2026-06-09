@@ -1,42 +1,23 @@
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  
-  http.post('https://jsonplaceholder.typicode.com/', () => {
-  async ({request}) => {  
-
-   await request.json();
-   
-   return HttpResponse.json( 
-      {
-        user: id,
-        date: '2024-05-30',
-        time: 18,
-        people: 8,
-        lanes: 2,
-        done: 'success', 
-      }
-   );
-    }   
-
-
-export const handlers = [     
-    http.get('https://jsonplaceholder.typicode.com/user' , () => {
-        console.log(user);
-        return HttpResponse.json({
-                
-                id: 1, 
-                date: 2024-05-30,
-                time: 18,
-                people: 8,
-                lanes: 2,
-                done: sucess,
-            },  
-             
-        )},
-    ),    
+  http.post(
+    'https://h5jbtjv6if.execute-api.eu-north-1.amazonaws.com',
+    async ({ request }) => {
+      const body = await request.json();
       
-    http.post('https://jsonplaceholder.typicode.com/user', () => {
-        return HttpResponse.json({ success: true, message: 'Booking confirmed' 
-    }),
-});
+      // Calculate price: 120 kr per person + 100 kr per lane
+      const price = parseInt(body.people) * 120 + parseInt(body.lanes) * 100;
+      
+      return HttpResponse.json({
+        active: true,
+        id: Math.floor(Math.random() * 100000),
+        when: body.when,
+        people: body.people,
+        lanes: body.lanes,
+        shoes: body.shoes,
+        price: price,
+      }, { status: 201 });
+    }
+  ),
+];
