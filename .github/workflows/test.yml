@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install modules
         working-directory: './Strajk-bowling'
-        run: npm install
+        run: npm ci
       - name: Run tests
         working-directory: './Strajk-bowling'
         run: npm run test -- --run
